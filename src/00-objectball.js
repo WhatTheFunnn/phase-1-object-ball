@@ -121,15 +121,16 @@ function gameObject () {
             }
         }
     };
-    const teams = home.concat(away);
+    var teams = home.concat(away);
     return [home, away, teams]
 };
 
-
-
-function numPointsScored(Name) {
-    
+/*function numPointsScored(gameObject) {
+    const teams = gameObject.map(home, away)
+    return teams     
 }
+
+var teams = numPointsScored(gameObject())
 
 /* 
 1. combine home and away; need to know what data type home and away are 
