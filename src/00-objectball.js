@@ -1,6 +1,8 @@
     const game = gameObject();
     const players = {...game.home.players, ...game.away.players};
     const colors = [game.home.colors, game.away.colors];
+    const mostPointsHome = {...game.home.players};
+    const mostPointsAway = {...game.away.players};
 
     function gameObject() {
         return { 
@@ -45,7 +47,7 @@
                     "Mason Plumlee": {
                         number: 1,
                         shoe: 19,
-                        points: 19,
+                        points: 26,
                         rebounds: 12,
                         assists: 6,
                         steals: 4,
@@ -56,7 +58,7 @@
                     "Jason terry": {
                         number: 31,
                         shoe: 15,
-                        points: 15,
+                        points: 19,
                         rebounds: 2,
                         assists: 2,
                         steals: 4,
@@ -204,19 +206,65 @@
     }
 
     function winningTeam() {
-        let game = gameObject();
-        let mp = 0;
-        let wt = " ";
-        for (let mostPoints in game){
-            let team = game[mostPoints]
-            for (let player in team.players){
-            debugger;
-                let data = players[player].points;
-                if (data >= 0 <= [4])
-                mp = data
-                wt = team
-                debugger
+        let game0 = mostPointsHome;
+        let game1 = mostPointsAway;
+        let homeTeamPoints = 0;
+        let awayTeamPoints = 0;
+        for (let pn in game0){
+            let player = game0[pn]
+            for(let stat in player){ 
+                player[stat]
+                if (stat === "points"){
+                    homeTeamPoints += player[stat]
+                }
             }
         }
-        return 
+        for (let pn in game1){
+            let player = game1[pn]
+            for(let stat in player){
+                player[stat]
+                if (stat === "points"){
+                    awayTeamPoints += player[stat]
+                }
+            }
+        }
+        if (homeTeamPoints > awayTeamPoints){
+            return game.home.teamName;
+        }
+        else (homeTeamPoints < awayTeamPoints)
+            return game.away.teamName;
+    }
+            
+    function playerWithLongestName () {
+        let pnl = 0;
+        let largePlayerName = " ";
+        
+        for (let name in players){
+            if (pnl <= name.length){
+                pnl = name.length
+                largePlayerName = name
+            }
+        }
+        return largePlayerName
+    }
+
+    function doesLongNameStealATon () {
+        pwln = playerWithLongestName();
+        pwlns = players[pwln].steals;
+        let pwms = " ";
+        let pwmsSteals = 0;
+        for (let name in players){
+            if (pwmsSteals <= players[name].steals){
+                pwms = name
+                pwmsSteals = players[name].steals
+            }
+            debugger;
+        }
+        if (pwln === pwms){
+            return true
+        }
+        else {
+            return false
+        }
+
     }
